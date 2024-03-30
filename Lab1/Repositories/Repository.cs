@@ -23,6 +23,11 @@ namespace Lab1.Repositories
         {
             return Context.Set<T>().Find(id);
         }
+
+        public T GetById(int id, Func<T, bool> where)
+        {
+            return Context.Set<T>().FirstOrDefault(where);
+        }
         public List<T> Get(Func<T, bool> where)
         {
             return Context.Set<T>().Where(where).ToList();
@@ -39,6 +44,11 @@ namespace Lab1.Repositories
         public void Update(T item)
         {
             Context.Update(item);
+        }
+
+        public IEnumerable<T> GetAll(Func<T, bool> where)
+        {
+            return Context.Set<T>().Where(where).ToList();
         }
     }
 }
