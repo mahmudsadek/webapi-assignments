@@ -10,5 +10,9 @@ namespace Lab1.Models
         
         [Column(TypeName = "money")]
         public decimal Price{ get; set; }
+
+        public bool isDeleted { get; set; } = false;
+
+        public DateTime? DeletedTime { get; set; }
     }
 }
