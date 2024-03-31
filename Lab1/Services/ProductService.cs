@@ -1,4 +1,5 @@
-﻿using Lab1.Models;
+﻿using Lab1.DTO;
+using Lab1.Models;
 using Lab1.Repositories;
 using Lab1.ViewModels;
 
@@ -12,9 +13,15 @@ namespace Lab1.Services
             ProductRepository = productRepository;
         }
 
-        public IEnumerable<Product> GetAll()
+        public IEnumerable<ProductWithIdDTO> GetAll()
         {
-            return ProductRepository.GetAll(p => p.isDeleted == false);
+            IEnumerable<Product> products =  ProductRepository.GetAll(p => p.isDeleted == false);
+            List<ProductWithIdDTO> productWithIdDTOs = new List<ProductWithIdDTO>();
+            foreach (var item in products)
+            {
+                productWithIdDTOs.Add(new ProductWithIdDTO() {Id = item.Id,Name = item.Name , Description = item.Description , Price = item.Price , CategoryId = item.CategoryId });
+            }
+            return productWithIdDTOs;
         }
 
         public Product GetById(int id)
@@ -26,10 +33,10 @@ namespace Lab1.Services
         {
             return ProductRepository.Get(where);
         }
-        public Product Insert(ProductViewModel newProd)
+        public Product Insert(ProductWithoutIdDTO newProd)
         {
             Product product = new Product()
-            { Name = newProd.Name, Description = newProd.Description, Price = newProd.Price };
+            { Name = newProd.Name, Description = newProd.Description, Price = newProd.Price ,CategoryId = newProd.CategoryId};
             ProductRepository.Insert(product);
             ProductRepository.Save();
             return product;
@@ -40,11 +47,12 @@ namespace Lab1.Services
             ProductRepository.Save();
         }
 
-            public void Update(Product product,ProductViewModel newProd)
+            public void Update(Product product,ProductWithoutIdDTO newProd)
         {
             product.Name = newProd.Name;
             product.Description = newProd.Description;
             product.Price = newProd.Price;
+            product.CategoryId = newProd.CategoryId;
             ProductRepository.Update(product);
             ProductRepository.Save();
         }
