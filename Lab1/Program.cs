@@ -24,7 +24,17 @@ namespace Lab1
                     options.UseSqlServer(@"Data Source=(local);Initial Catalog=LAB1API;Integrated Security=True;trustservercertificate = true");
                 });
             builder.Services.AddScoped<IProductRepository , ProductRepository>();
+            builder.Services.AddScoped<ICategoryRepository , CategoryRepository>();
             builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
+
+            builder.Services.AddCors(options => {
+                options.AddPolicy("MyPolicy",
+                                  policy => policy.AllowAnyMethod()
+                                  .AllowAnyOrigin()
+                                  .AllowAnyHeader());
+            });
+
 
             var app = builder.Build();
 
@@ -34,7 +44,7 @@ namespace Lab1
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-
+            app.UseCors("MyPolicy");
             app.UseAuthorization();
 
 
