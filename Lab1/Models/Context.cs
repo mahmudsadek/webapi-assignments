@@ -5,6 +5,7 @@ namespace Lab1.Models
     public class Context : DbContext
     {
         public DbSet<Product> Product { get; set; }
+        public DbSet<Category> Category { get; set; }
 
         public Context() : base() { }
 

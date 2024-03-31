@@ -11,6 +11,11 @@ namespace Lab1.Models
         [Column(TypeName = "money")]
         public decimal Price{ get; set; }
 
+        [ForeignKey("Category")]
+        public int? CategoryId{ get; set; }
+
+        public Category? Category { get; set; }
+
         public bool isDeleted { get; set; } = false;
 
         public DateTime? DeletedTime { get; set; }
