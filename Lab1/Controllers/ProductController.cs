@@ -1,4 +1,5 @@
-﻿using Lab1.Models;
+﻿using Lab1.DTO;
+using Lab1.Models;
 using Lab1.Services;
 using Lab1.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -18,7 +19,7 @@ namespace Lab1.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            IEnumerable<Product> products = _productService.GetAll();
+            IEnumerable<ProductWithIdDTO> products = _productService.GetAll();
             return Ok(products);
         }
 
@@ -71,7 +72,7 @@ namespace Lab1.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(ProductViewModel newProduct)
+        public IActionResult Add(ProductWithoutIdDTO newProduct)
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +82,7 @@ namespace Lab1.Controllers
             return BadRequest(ModelState);
         }
         [HttpPut]
-        public IActionResult Edit(int id, ProductViewModel Modefiedproduct)
+        public IActionResult Edit(int id, ProductWithoutIdDTO Modefiedproduct)
         {
             Product OldProduct = _productService.GetById(id);
             if (OldProduct == null)
