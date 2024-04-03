@@ -29,7 +29,7 @@ namespace Lab1.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(CategoryWithoutId category) 
+        public IActionResult Add(CategoryWithoutIdDTO category) 
         {
             if (ModelState.IsValid)
             {

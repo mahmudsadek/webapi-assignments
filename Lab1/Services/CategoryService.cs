@@ -20,7 +20,7 @@ namespace Lab1.Services
             {
                 return null;
             }
-            CategoryWithProductNameDTO cat = new CategoryWithProductNameDTO() 
+            CategoryWithProductNameDTO cat = new() 
             {Id = category.Id,Name = category.Name , ProductNames = new List<string>()};
             if (category.Products != null)
             { 
@@ -32,7 +32,7 @@ namespace Lab1.Services
             return cat;
         }
 
-        public Category Insert(CategoryWithoutId category)
+        public Category Insert(CategoryWithoutIdDTO category)
         {
             Category cat = new Category()
             { Name = category.Name};

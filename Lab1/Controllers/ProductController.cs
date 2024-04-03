@@ -2,6 +2,7 @@
 using Lab1.Models;
 using Lab1.Services;
 using Lab1.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,12 +18,14 @@ namespace Lab1.Controllers
             _productService = productService;
         }
         [HttpGet]
+        [Authorize]
         public IActionResult GetAll()
         {
             IEnumerable<ProductWithIdDTO> products = _productService.GetAll();
             return Ok(products);
         }
 
+        [Authorize]
         [HttpGet("{id:int}")]
         public IActionResult GetById(int id)
         {
@@ -35,6 +38,7 @@ namespace Lab1.Controllers
             return Ok(product);
         }
 
+        [Authorize]
         [HttpGet("{name:alpha}")]
         public IActionResult GetByName(string name)
         {
@@ -47,6 +51,7 @@ namespace Lab1.Controllers
             return Ok(products);
         }
 
+        [Authorize]
         [HttpGet("Price")]
         public IActionResult Price(decimal price)
         {

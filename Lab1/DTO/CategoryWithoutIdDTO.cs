@@ -1,6 +1,6 @@
 ﻿namespace Lab1.DTO
 {
-    public class CategoryWithoutId
+    public class CategoryWithoutIdDTO
     {
         public string Name { get; set; }
     }

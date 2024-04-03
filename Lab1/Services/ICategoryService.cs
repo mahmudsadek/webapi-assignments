@@ -6,6 +6,6 @@ namespace Lab1.Services
     public interface ICategoryService
     {
         CategoryWithProductNameDTO GetById(int id);
-        Category Insert(CategoryWithoutId category);
+        Category Insert(CategoryWithoutIdDTO category);
     }
 }
